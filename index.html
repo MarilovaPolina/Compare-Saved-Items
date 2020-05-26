@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Array</title>
+	<link href="style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body class="body">
+	<div id="header">
+		<h1 class="heading">Compare Saved Items</h1>
+		<h5 class="textHeader">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation<br>ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+	</div>
+
+	<div id="mainBlock">
+		<div class="array">
+			<table class="table table-striped">
+			  <thead>
+			    <tr>
+				    <td>Number</td>
+					<td>Price</td>
+					<td>Photo</td>
+			    </tr>
+			  </thead>
+			</table>
+		</div>
+
+	<br>
+
+		<div class="input-group mb-3">
+	 		<input style="height:50px" type="text" class="form-control" placeholder="Photo link" aria-label="Recipient's username" aria-describedby="basic-addon2" id="newArrayPhoto">
+		</div>
+
+		<div class="input-group mb-3">
+	 		<input style="height:50px" type="text" class="form-control" placeholder="Price" aria-label="Recipient's username" aria-describedby="basic-addon2" id="newArrayElement">
+	 		<div class="input-group-append">
+	   			<button class="btn btn-outline-secondary addBtn" id="addElement" onclick="addElement()">Add Price</button>
+	  		</div>
+		</div>
+
+		
+		<br><br>
+
+		<div class="input-group mb-3">
+		  <input style="height:50px" type="text" id="deleteByIndex" placeholder="Delite purchase" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+		  <div class="input-group-append">
+		    <button class="btn btn-outline-secondary" id="deleteByIndex" onclick="deleteByIndex()">Delete By Number</button>
+		  </div>
+		</div>
+
+		<br><br>
+
+		<button class="btn btn-outline-secondary sortBtn" id="sort" onclick="sortArrayHigh()">Sort prices low to high</button>
+		<br><br>
+		<button class="btn btn-outline-secondary sortBtn" id="sort" onclick="sortArrayLow()">Sort prices high to low</button>
+	</div>
+
+	<script>
+
+		var array = [];
+
+		var table = document.getElementsByTagName('table');
+		console.log(table);
+		var newArrayElement = document.getElementById('newArrayElement');
+		var delete_index = document.getElementById('deleteByIndex');
+
+		var newArrayPhoto = document.getElementById('newArrayPhoto');
+
+
+		function updateArray() {
+
+			generateTable();
+			var value_photo = newArrayPhoto.value;
+
+				array.forEach(function (item, index, array,value_photo) {
+				var value_photo = newArrayPhoto.value;
+
+				console.log('index: ', index, ' item: ', item, 'array:', array, 'photo:', value_photo);
+
+				var tr = document.createElement('tr');
+				tr.innerHTML = '<td>' + index + '</td> <td>' + item + '</td><td>'+value_photo+'</td>';
+
+				table[0].append(tr);
+			});
+
+
+		}
+
+		function generateTable() {
+
+			while (table[0].firstChild) {
+				table[0].removeChild(table[0].firstChild);
+			}
+
+			var tr = document.createElement('tr');
+			tr.innerHTML = '<td> Number </td> <td> Price </td> <td> Photo </td>';
+			table[0].append(tr);
+		}
+
+
+		function addElement() {
+
+			var value_element = newArrayElement.value;
+			var value_photo = newArrayPhoto.value;
+
+			if(value_element=="" || value_photo==""){
+				newArrayElement.style="border:1px solid red;height:50px";
+				newArrayPhoto.style="border:1px solid red;height:50px";
+			}
+
+			else{
+
+			array.push(value_element);
+			console.log(value_photo);
+			
+			newArrayElement.value = '';
+			
+			updateArray(array);
+			newArrayElement.style="height:50px";
+			}
+			newArrayPhoto.value = '';
+		}
+
+		function deleteByIndex() {
+			var index = delete_index.value;
+			array.splice(index, 1);
+			delete_index.value = '';
+			updateArray(array);
+		}
+
+		function sortArrayHigh() {
+			array.sort(function (a, b) {
+				return a - b;
+			})
+			updateArray(array);
+		}
+
+		function sortArrayLow() {
+			array.sort(function (b, a) {
+				return a-b;
+			})
+			updateArray(array);
+		}
+
+	</script>
+</body>
+
+</html>
