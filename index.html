@@ -64,7 +64,7 @@
 		var table = document.getElementsByTagName('table');
 		console.log(table);
 		var newArrayElement = document.getElementById('newArrayElement');
-		var delete_index = document.getElementById('deleteByIndex');
+		var deleteIndex = document.getElementById('deleteByIndex');
 
 		var newArrayPhoto = document.getElementById('newArrayPhoto');
 
@@ -124,9 +124,9 @@
 		}
 
 		function deleteByIndex() {
-			var index = delete_index.value;
+			var index = deleteIndex.value;
 			array.splice(index, 1);
-			delete_index.value = '';
+			deleteIndex.value = '';
 			updateArray(array);
 		}
 
